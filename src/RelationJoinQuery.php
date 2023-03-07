@@ -34,39 +34,30 @@ class RelationJoinQuery
         if ($relation instanceof BelongsTo) {
             return static::belongsTo($relation, $query, $parentQuery, $type, $alias);
         }
-
-        else if ($relation instanceof MorphToMany) {
+        if ($relation instanceof MorphToMany) {
             return static::morphToMany($relation, $query, $parentQuery, $type, $alias);
         }
-
-        else if ($relation instanceof BelongsToMany) {
+        if ($relation instanceof BelongsToMany) {
             return static::belongsToMany($relation, $query, $parentQuery, $type, $alias);
         }
-
-        else if ($relation instanceof HasMany) {
+        if ($relation instanceof HasMany) {
             return static::hasOneOrMany($relation, $query, $parentQuery, $type, $alias);
         }
-
-        else if ($relation instanceof HasOneThrough) {
+        if ($relation instanceof HasOneThrough) {
             return static::hasOneOrManyThrough($relation, $query, $parentQuery, $type, $alias);
         }
-
-        else if ($relation instanceof HasManyThrough) {
+        if ($relation instanceof HasManyThrough) {
             return static::hasOneOrManyThrough($relation, $query, $parentQuery, $type, $alias);
         }
-
-        else if ($relation instanceof HasOne) {
+        if ($relation instanceof HasOne) {
             return static::hasOneOrMany($relation, $query, $parentQuery, $type, $alias);
         }
-
-        else if ($relation instanceof MorphMany) {
+        if ($relation instanceof MorphMany) {
             return static::morphOneOrMany($relation, $query, $parentQuery, $type, $alias);
         }
-
-        else if ($relation instanceof MorphOne) {
+        if ($relation instanceof MorphOne) {
             return static::morphOneOrMany($relation, $query, $parentQuery, $type, $alias);
         }
-
         throw new InvalidArgumentException('Unsupported relation type [' . get_class($relation) . '].');
     }
 
@@ -111,7 +102,7 @@ class RelationJoinQuery
      */
     protected static function belongsToMany(Relation $relation, Builder $query, Builder $parentQuery, string $type = 'inner', string $alias = null)
     {
-        if (strpos($alias, ',') !== false) {
+        if (! is_null($alias) && strpos($alias, ',') !== false) {
             [$pivotAlias, $farAlias] = explode(',', $alias);
         } else {
             [$pivotAlias, $farAlias] = [null, $alias];
@@ -202,7 +193,7 @@ class RelationJoinQuery
      */
     protected static function hasOneOrManyThrough(Relation $relation, Builder $query, Builder $parentQuery, string $type = 'inner', string $alias = null)
     {
-        if (strpos($alias, ',') !== false) {
+        if (! is_null($alias) && strpos($alias, ',') !== false) {
             [$throughAlias, $farAlias] = explode(',', $alias);
         } else {
             [$throughAlias, $farAlias] = [null, $alias];
@@ -279,7 +270,7 @@ class RelationJoinQuery
      */
     protected static function morphToMany(Relation $relation, Builder $query, Builder $parentQuery, string $type = 'inner', string $alias = null)
     {
-        if (strpos($alias, ',') !== false) {
+        if (! is_null($alias) && strpos($alias, ',') !== false) {
             [$pivotAlias, $farAlias] = explode(',', $alias);
         } else {
             [$pivotAlias, $farAlias] = [null, $alias];
