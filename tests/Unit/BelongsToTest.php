@@ -3,15 +3,15 @@
 namespace Reedware\LaravelRelationJoins\Tests\Unit;
 
 use Closure;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Reedware\LaravelRelationJoins\Tests\Models\EloquentPostModelStub;
 use Reedware\LaravelRelationJoins\Tests\Models\EloquentUserModelStub;
 
 class BelongsToTest extends TestCase
 {
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function circular(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)
@@ -21,10 +21,8 @@ class BelongsToTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function circular_alias(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)
@@ -34,10 +32,8 @@ class BelongsToTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function nested_alias_multiple(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentPostModelStub)
@@ -47,10 +43,8 @@ class BelongsToTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function nested_constraints(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)
@@ -65,10 +59,8 @@ class BelongsToTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function nested_constraints_nested(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)

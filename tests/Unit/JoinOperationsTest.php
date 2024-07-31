@@ -3,14 +3,14 @@
 namespace Reedware\LaravelRelationJoins\Tests\Unit;
 
 use Closure;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Reedware\LaravelRelationJoins\Tests\Models\EloquentUserModelStub;
 
 class JoinOperationsTest extends TestCase
 {
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function on(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)->joinRelation('phone', function ($join) {
@@ -21,10 +21,8 @@ class JoinOperationsTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function orOn(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)->joinRelation('phone', function ($join) {
@@ -36,10 +34,8 @@ class JoinOperationsTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function nested(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)->joinRelation('phone', function ($join) {

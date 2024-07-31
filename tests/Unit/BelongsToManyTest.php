@@ -3,6 +3,8 @@
 namespace Reedware\LaravelRelationJoins\Tests\Unit;
 
 use Closure;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Reedware\LaravelRelationJoins\Tests\Models\EloquentRoleModelStub;
 use Reedware\LaravelRelationJoins\Tests\Models\EloquentSoftDeletingUserModelStub;
 use Reedware\LaravelRelationJoins\Tests\Models\EloquentUserModelStub;
@@ -10,10 +12,8 @@ use Reedware\LaravelRelationJoins\Tests\Models\EloquentVideoModelStub;
 
 class BelongsToManyTest extends TestCase
 {
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function basic(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)
@@ -23,10 +23,8 @@ class BelongsToManyTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function inverse(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentRoleModelStub)
@@ -36,10 +34,8 @@ class BelongsToManyTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function asMorph(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentVideoModelStub)
@@ -50,10 +46,8 @@ class BelongsToManyTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function alias_child(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)
@@ -63,10 +57,8 @@ class BelongsToManyTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function alias_pivot(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)
@@ -76,10 +68,8 @@ class BelongsToManyTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function alias_multiple(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)
@@ -89,10 +79,8 @@ class BelongsToManyTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function softDeletes_parent(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentSoftDeletingUserModelStub)
@@ -102,10 +90,8 @@ class BelongsToManyTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function softDeletes_child(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)
@@ -115,10 +101,8 @@ class BelongsToManyTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function circular(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)
@@ -128,10 +112,8 @@ class BelongsToManyTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function circular_childAlias(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)
@@ -141,10 +123,8 @@ class BelongsToManyTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function leftJoin(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)
@@ -154,10 +134,8 @@ class BelongsToManyTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function leftJoin_inverse(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentRoleModelStub)
@@ -167,10 +145,8 @@ class BelongsToManyTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function constraints(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)
@@ -183,10 +159,8 @@ class BelongsToManyTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function constraints_pivot(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)
@@ -199,10 +173,8 @@ class BelongsToManyTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function constraints_pivot_nested(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)
@@ -219,10 +191,8 @@ class BelongsToManyTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function constraints_pivot_model(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)
@@ -235,10 +205,8 @@ class BelongsToManyTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function constraints_pivot_model_nested(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)
@@ -255,10 +223,8 @@ class BelongsToManyTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function constraints_pivot_model_scope(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)
@@ -271,10 +237,8 @@ class BelongsToManyTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function constraints_pivot_model_softDeletes(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)
@@ -284,10 +248,8 @@ class BelongsToManyTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function constraints_pivot_model_softDeletes_withTrashed(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)

@@ -4,6 +4,8 @@ namespace Reedware\LaravelRelationJoins\Tests\Unit;
 
 use BadMethodCallException;
 use Closure;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Reedware\LaravelRelationJoins\Tests\Models\EloquentCountryModelStub;
 use Reedware\LaravelRelationJoins\Tests\Models\EloquentPostModelStub;
 use Reedware\LaravelRelationJoins\Tests\Models\EloquentSoftDeletingCountryModelStub;
@@ -12,10 +14,8 @@ use Reedware\LaravelRelationJoins\Tests\Models\EloquentUserModelStub;
 
 class HasManyThroughTest extends TestCase
 {
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function basic(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentCountryModelStub)
@@ -25,10 +25,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function inverse(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentPostModelStub)
@@ -38,10 +36,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function alias_far(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentCountryModelStub)
@@ -51,10 +47,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function alias_through(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentCountryModelStub)
@@ -64,10 +58,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function alias_multiple(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentCountryModelStub)
@@ -77,10 +69,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function alias_multiple_nested(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentCountryModelStub)
@@ -90,10 +80,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function softDeletes_parent(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentSoftDeletingCountryModelStub)
@@ -103,10 +91,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function softDeletes_through(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentCountryModelStub)
@@ -116,10 +102,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function softDeletes_child(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentCountryModelStub)
@@ -129,10 +113,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function circular(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)
@@ -142,10 +124,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function circular_alias(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)
@@ -155,10 +135,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function circular_alias_softDeletes(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentSoftDeletingUserModelStub)
@@ -168,10 +146,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function throughCircular(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)
@@ -181,10 +157,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function throughCircular_alias_softDeletes(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentUserModelStub)
@@ -194,10 +168,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function leftJoin(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentCountryModelStub)
@@ -207,10 +179,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function leftJoin_inverse(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentPostModelStub)
@@ -220,10 +190,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function constraints(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentCountryModelStub)
@@ -235,10 +203,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function constraints_pivot(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentCountryModelStub)
@@ -251,10 +217,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function constraints_pivot_scope(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentCountryModelStub)
@@ -267,10 +231,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function constraints_pivot_softDeletes(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentCountryModelStub)
@@ -283,10 +245,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function constraints_pivot_softDeletes_withTrashed(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentCountryModelStub)
@@ -298,10 +258,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function constraints_pivot_softDeletes_alias(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentCountryModelStub)
@@ -311,10 +269,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function constraints_pivot_softDeletes_withTrashed_alias(Closure $query, string $builderClass)
     {
         $builder = $query(new EloquentCountryModelStub)
@@ -326,10 +282,8 @@ class HasManyThroughTest extends TestCase
         $this->assertEquals($builderClass, get_class($builder));
     }
 
-    /**
-     * @test
-     * @dataProvider queryDataProvider
-     */
+    #[Test]
+    #[DataProvider('queryDataProvider')]
     public function constraints_pivot_missingMethod(Closure $query, string $builderClass)
     {
         $this->expectException(BadMethodCallException::class);

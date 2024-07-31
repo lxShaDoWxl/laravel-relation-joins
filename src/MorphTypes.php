@@ -2,24 +2,30 @@
 
 namespace Reedware\LaravelRelationJoins;
 
+use Illuminate\Database\Eloquent\Model;
+
 class MorphTypes
 {
     /**
      * The underlying morph types.
      *
-     * @var array
+     * @var array<class-string<Model>>
      */
-    public $items;
+    public array $items = [];
+
+    public bool $all = false;
 
     /**
      * Creates a new morph types instance.
      *
-     * @param  string|array  $items
-     *
-     * @return $this;
+     * @param  class-string<Model>|array<class-string<Model>>|true  $items
      */
-    public function __construct($items)
+    public function __construct(array|string|bool $items)
     {
-        $this->items = (array) $items;
+        if ($items === true) {
+            $this->all = true;
+        } else {
+            $this->items = (array) $items;
+        }
     }
 }
